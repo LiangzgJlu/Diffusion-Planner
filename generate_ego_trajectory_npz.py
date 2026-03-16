@@ -59,7 +59,7 @@ def generate_and_save(model: Diffusion_Planner, config: Config, input_path: Path
         raise KeyError(f"{input_path} 缺少模型输入字段: {missing_keys}")
 
     model_inputs = {key: _to_tensor(npz_data[key], device) for key in MODEL_INPUT_KEYS}
-
+    model_inputs = config.observation_normalizer(model_inputs)
     with torch.no_grad():
         _, outputs = model(model_inputs)
 
