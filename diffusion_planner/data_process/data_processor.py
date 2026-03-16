@@ -151,11 +151,7 @@ class DataProcessor(object):
             ego_current_state = calculate_additional_ego_states(ego_agent_past, time_stamps_past)
 
             # gather data
-<<<<<<< HEAD
             data = {"map_name": map_name, "token": token, "ego_current_state": ego_current_state, "ego_agent_future": ego_agent_future, "ego_agent_past": ego_agent_past,
-=======
-            data = {"map_name": map_name, "token": token, "ego_current_state": ego_current_state, "ego_agent_future": ego_agent_future,
->>>>>>> e22526273b6144ae1389958853c4230eb23ce1b5
                     "neighbor_agents_past": neighbor_agents_past, "neighbor_agents_future": neighbor_agents_future, "static_objects": static_objects}
             data.update(vector_map)
 
