@@ -62,7 +62,6 @@ if __name__ == "__main__":
     # Only preprocess the training data
     with open('./nuplan_train.json', "r", encoding="utf-8") as file:
         log_names = json.load(file)
-    log_names = log_names[]
     map_version = "nuplan-maps-v1.0"    
     builder = NuPlanScenarioBuilder(args.data_path, args.map_path, sensor_root, db_files, map_version)
     scenario_filter = ScenarioFilter(*get_filter_parameters(args.scenarios_per_type, args.total_scenarios, args.shuffle_scenarios, log_names=log_names))

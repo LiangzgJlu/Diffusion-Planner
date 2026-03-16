@@ -151,7 +151,11 @@ chmod +x torch_run.sh
 
 The code is under cleaning and will be released gradually.
 
+<<<<<<< HEAD
 - [ ] e2e & real world vehicle
+=======
+- [x] e2e & real world vehicle ([**Hyper Diffusion Planner**](https://github.com/ZhengYinan-AIR/Hyper-Diffusion-Planner))
+>>>>>>> e22526273b6144ae1389958853c4230eb23ce1b5
 - [ ] delivery vehicle dataset (government approval in progress)
 - [x] guidance tutorial
 - [x] data preprocess
