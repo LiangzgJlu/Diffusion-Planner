@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 
 from nuplan.common.actor_state.state_representation import Point2D
@@ -175,7 +175,7 @@ class DataProcessor(object):
             num_workers = min(num_workers, total)
 
         if num_workers == 1:
-            for scenario in tqdm(scenarios, total=total):
+            for scenario in tqdm(scenarios, total=total, desc="Processing scenarios"):
                 self.process_and_save_scenario(scenario)
             return
 
@@ -184,13 +184,9 @@ class DataProcessor(object):
             initializer=_init_worker,
             initargs=(self,),
         ) as executor:
-            results = executor.map(
-                _process_scenario_worker,
-                scenarios,
-                chunksize=max(1, int(chunksize)),
-            )
-            for _ in tqdm(results, total=total):
-                pass
+            futures = [executor.submit(_process_scenario_worker, scenario) for scenario in scenarios]
+            for future in tqdm(as_completed(futures), total=total, desc="Processing scenarios"):
+                future.result()
 
     def process_and_save_scenario(self, scenario):
         data = self.process_scenario(scenario)
